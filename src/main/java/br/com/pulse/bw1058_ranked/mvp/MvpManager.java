@@ -37,7 +37,7 @@ public class MvpManager{
     public void endGame() {
         Player mvp = determineMVP();
         if (mvp != null) {
-            Bukkit.broadcastMessage("§7O MVP da partida foi: §d" + mvp.getName());
+            Bukkit.broadcastMessage("§7O MVP da partida foi: §5" + mvp.getName());
             int mvpCount = eloManager.getPlayerData().getInt(mvp.getUniqueId() + ".mvp", 0);
             eloManager.getPlayerData().set(mvp.getUniqueId() + ".mvp", mvpCount + 1);
             eloManager.savePlayerData();

@@ -59,7 +59,7 @@ public class JoinQueueCommand implements CommandExecutor, Listener {
         infoLore.add("§7Veja suas informações pessoais.");
         infoLore.add("");
         infoLore.add("§7Seu Rank: " + eloManager.getRank(eloManager.getElo(player.getUniqueId(), "geral")));
-        infoLore.add("§7Seu Elo: §d" + eloManager.getElo(player.getUniqueId(), "geral"));
+        infoLore.add("§7Seu Elo: §5" + eloManager.getElo(player.getUniqueId(), "geral"));
         infoMeta.setLore(infoLore);
         infoItem.setItemMeta(infoMeta);
         joinMenu.setItem(4, infoItem);
@@ -70,7 +70,7 @@ public class JoinQueueCommand implements CommandExecutor, Listener {
         List<String> Ranked1v1Lore = new ArrayList<>();
         Ranked1v1Lore.add("§7Entrar na fila para 1v1 Ranked.");
         Ranked1v1Lore.add("");
-        Ranked1v1Lore.add("§7Elo Ranked1v1: " + eloManager.getElo(player.getUniqueId(), "1v1"));
+        Ranked1v1Lore.add("§7Elo Ranked1v1: §5" + eloManager.getElo(player.getUniqueId(), "1v1"));
         Ranked1v1Lore.add("");
         Ranked1v1Lore.add("§eClique para entrar na fila.");
         Ranked1v1Meta.setLore(Ranked1v1Lore);
@@ -83,7 +83,7 @@ public class JoinQueueCommand implements CommandExecutor, Listener {
         List<String> RankedSoloLore = new ArrayList<>();
         RankedSoloLore.add("§7Entrar na fila para Solo Ranked.");
         RankedSoloLore.add("");
-        RankedSoloLore.add("§7Elo RankedSolo: " + eloManager.getElo(player.getUniqueId(), "solo"));
+        RankedSoloLore.add("§7Elo RankedSolo: §5" + eloManager.getElo(player.getUniqueId(), "solo"));
         RankedSoloLore.add("");
         RankedSoloLore.add("§eClique para entrar na fila.");
         RankedSoloMeta.setLore(RankedSoloLore);
@@ -96,7 +96,7 @@ public class JoinQueueCommand implements CommandExecutor, Listener {
         List<String> Ranked4v4Lore = new ArrayList<>();
         Ranked4v4Lore.add("§7Entrar na fila para 4v4 Ranked.");
         Ranked4v4Lore.add("");
-        Ranked4v4Lore.add("§7Elo Ranked4v4: " + eloManager.getElo(player.getUniqueId(), "4v4"));
+        Ranked4v4Lore.add("§7Elo Ranked4v4: §5" + eloManager.getElo(player.getUniqueId(), "4v4"));
         Ranked4v4Lore.add("");
         Ranked4v4Lore.add("§eClique para entrar na fila.");
         Ranked4v4Meta.setLore(Ranked4v4Lore);

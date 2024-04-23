@@ -35,7 +35,7 @@ public class QueueManager {
         queue.add(player);
         player.sendMessage("");
         player.sendMessage("§7Você entrou na fila do modo: §5" + gameType);
-        player.sendMessage("§7Digite §d/leavequeue §7para sair da fila.");
+        player.sendMessage("§7Digite §5/leavequeue §7para sair da fila.");
         player.sendMessage("");
         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
         checkQueue(gameType);

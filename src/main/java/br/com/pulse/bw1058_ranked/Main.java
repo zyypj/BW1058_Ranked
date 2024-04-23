@@ -54,7 +54,11 @@ public final class Main extends JavaPlugin {
         getCommand("leavequeue").setExecutor(new LeaveQueueCommand(queueManager));
         getCommand("rank").setExecutor(new RankCommand(eloManager));
         getCommand("elo").setExecutor(new EloCommand(eloManager));
-        new Placeholder(this, eloManager, mvpManager).register();
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            Bukkit.getScheduler().runTaskLater(this, () ->
+                    getLogger().info("Hook to PlaceholderAPI support!"), 20L);
+            new Placeholder(this, eloManager, mvpManager).register();
+        }
         getLogger().info("");
         getLogger().info("BW1058 Ranked");
         getLogger().info("by tadeu");

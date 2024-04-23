@@ -158,8 +158,8 @@ public class EloListener implements Listener {
             }
         }
         // Temporarily blocked items
-        if (group.equalsIgnoreCase("RankedSolo") || group.equalsIgnoreCase("Ranked1v1") || group.equalsIgnoreCase("Ranked4v4")) {
-            if (!(teamA.isBedDestroyed() || teamB.isBedDestroyed())) {
+        if (group.equalsIgnoreCase("Ranked1v1") || group.equalsIgnoreCase("Ranked4v4")) {
+            if (!(teamA.isBedDestroyed()) || !(teamB.isBedDestroyed())) {
                 if (identifier.equals("potions-category.category-content.invisibility") ||
                         identifier.equals("utility-category.category-content.tnt") ||
                         identifier.equals("utility-category.category-content.tower") ||
