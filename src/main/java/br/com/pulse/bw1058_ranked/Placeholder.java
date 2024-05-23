@@ -1,7 +1,6 @@
 package br.com.pulse.bw1058_ranked;
 
 import br.com.pulse.bw1058_ranked.elo.EloManager;
-import br.com.pulse.bw1058_ranked.mvp.MvpManager;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -10,12 +9,10 @@ public class Placeholder extends PlaceholderExpansion {
 
     private final Main plugin;
     private final EloManager eloManager;
-    private final MvpManager mvpManager;
 
-    public Placeholder(Main plugin, EloManager eloManager, MvpManager mvpManager) {
+    public Placeholder(Main plugin, EloManager eloManager) {
         this.plugin = plugin;
         this.eloManager = eloManager;
-        this.mvpManager = mvpManager;
     }
 
     @Override
@@ -42,9 +39,6 @@ public class Placeholder extends PlaceholderExpansion {
                         eloManager.getElo(player.getUniqueId(), "ranked4v4") +
                         eloManager.getElo(player.getUniqueId(), "rankedsolo")) / 3;
                 return eloManager.getRank(eloGeralRank);
-            case "mvp_count":
-                int mvpCount = mvpManager.getPlayerMVPCount(player);
-                return String.valueOf(mvpCount);
         }
 
         return null;

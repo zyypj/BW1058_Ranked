@@ -4,7 +4,6 @@ import br.com.pulse.bw1058_ranked.elo.EloListener;
 import br.com.pulse.bw1058_ranked.elo.EloManager;
 import br.com.pulse.bw1058_ranked.elo.commands.EloCommand;
 import br.com.pulse.bw1058_ranked.misc.RankCommand;
-import br.com.pulse.bw1058_ranked.mvp.MvpManager;
 import br.com.pulse.bw1058_ranked.queue.JoinQueueCommand;
 import br.com.pulse.bw1058_ranked.queue.LeaveQueueCommand;
 import br.com.pulse.bw1058_ranked.queue.QueueManager;
@@ -20,9 +19,8 @@ import java.io.IOException;
 
 public final class Main extends JavaPlugin {
 
-    private EloManager eloManager;
-    private QueueManager queueManager;
-    private MvpManager mvpManager;
+    private static EloManager eloManager;
+    private static QueueManager queueManager;
 
     @Override
     public void onEnable() {
@@ -46,10 +44,9 @@ public final class Main extends JavaPlugin {
         }
         FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerDataFile);
         queueManager = new QueueManager(this, eloManager);
-        eloManager = new EloManager(this, playerData, mvpManager);
-        mvpManager = new MvpManager(eloManager);
+        eloManager = new EloManager(this, playerData);
         Bukkit.getPluginManager().registerEvents(new JoinQueueCommand(queueManager, eloManager), this);
-        Bukkit.getPluginManager().registerEvents(new EloListener(eloManager, mvpManager, this, playerData), this);
+        Bukkit.getPluginManager().registerEvents(new EloListener(eloManager, this, playerData), this);
         getCommand("joinqueue").setExecutor(new JoinQueueCommand(queueManager, eloManager));
         getCommand("leavequeue").setExecutor(new LeaveQueueCommand(queueManager));
         getCommand("rank").setExecutor(new RankCommand(eloManager));
@@ -57,7 +54,7 @@ public final class Main extends JavaPlugin {
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             Bukkit.getScheduler().runTaskLater(this, () ->
                     getLogger().info("Hook to PlaceholderAPI support!"), 20L);
-            new Placeholder(this, eloManager, mvpManager).register();
+            new Placeholder(this, eloManager).register();
         }
         getLogger().info("");
         getLogger().info("BW1058 Ranked");
@@ -69,5 +66,13 @@ public final class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         HandlerList.unregisterAll();
+    }
+
+    public static EloAPI getEloAPI() {
+        return eloManager;
+    }
+
+    public static QueueAPI getQueueAPI() {
+        return queueManager;
     }
 }

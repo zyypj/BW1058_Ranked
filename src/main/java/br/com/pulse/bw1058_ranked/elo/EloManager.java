@@ -1,7 +1,7 @@
 package br.com.pulse.bw1058_ranked.elo;
 
+import br.com.pulse.bw1058_ranked.EloAPI;
 import br.com.pulse.bw1058_ranked.Main;
-import br.com.pulse.bw1058_ranked.mvp.MvpManager;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,13 +10,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-public class EloManager {
+public class EloManager implements EloAPI {
 
     private final FileConfiguration playerData;
-    private final MvpManager mvpManager;
 
-    public EloManager(Main plugin, FileConfiguration playerData, MvpManager mvpManager) {
-        this.mvpManager = mvpManager;
+    public EloManager(Main plugin, FileConfiguration playerData) {
         this.playerData = playerData;
     }
 
@@ -42,26 +40,30 @@ public class EloManager {
     }
 
     public String getRank(int elo) {
-        if (elo < 1000) {
+        if (elo <= 50) {
             return "§4[Bronze III]";
-        } else if (elo < 1050) {
+        } else if (elo < 100) {
             return "§4[Bronze II]";
-        } else if (elo < 1100) {
+        } else if (elo < 150) {
             return "§4[Bronze I]";
-        } else if (elo < 1150) {
+        } else if (elo < 250) {
             return "§8[Prata III]";
-        } else if (elo < 1200) {
+        } else if (elo < 350) {
             return "§8[Prata II]";
-        } else if (elo < 1250) {
+        } else if (elo < 450) {
             return "§8[Prata I]";
-        } else if (elo < 1300) {
+        } else if (elo < 600) {
             return "§6[Ouro III]";
-        } else if (elo < 1350) {
+        } else if (elo < 700) {
             return "§6[Ouro II]";
-        } else if (elo < 1400) {
+        } else if (elo < 800) {
             return "§6[Ouro I]";
+        } else if (elo < 900) {
+            return "§b[Diamante III]";
+        } else if (elo < 1100) {
+            return "§b[Diamante II]";
         } else {
-            return "§c[Sem Rank]";
+            return "§b[Diamante I]";
         }
     }
 
@@ -76,11 +78,10 @@ public class EloManager {
             for (String uuidString : playerData.getKeys(false)) {
 
                 // Define o elo inicial como 1000 em todos os modos
-                int eloSolo = 1000;
-                int elo1v1 = 1000;
-                int elo4v4 = 1000;
-                int eloSoma = eloSolo + elo1v1 + elo4v4;
-                int eloGeral = eloSoma / 3;
+                int eloSolo = 0;
+                int elo1v1 = 0;
+                int elo4v4 = 0;
+                int eloGeral = 0;
                 int mvpCount = 0;
 
                 // Se o jogador já tiver um elo registrado, mantém o elo atual

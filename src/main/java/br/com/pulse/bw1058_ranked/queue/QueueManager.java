@@ -1,6 +1,7 @@
 package br.com.pulse.bw1058_ranked.queue;
 
 import br.com.pulse.bw1058_ranked.Main;
+import br.com.pulse.bw1058_ranked.QueueAPI;
 import br.com.pulse.bw1058_ranked.elo.EloManager;
 import com.andrei1058.bedwars.api.BedWars;
 import org.bukkit.Bukkit;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class QueueManager {
+public class QueueManager implements QueueAPI {
 
     private final Main plugin;
     private final EloManager eloManager;
@@ -39,6 +40,11 @@ public class QueueManager {
         player.sendMessage("");
         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
         checkQueue(gameType);
+    }
+
+    @Override
+    public List<Player> getQueue(String gameType) {
+        return gameQueue.getOrDefault(gameType, new ArrayList<>());
     }
 
     public void leaveQueue(Player player) {
